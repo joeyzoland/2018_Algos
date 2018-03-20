@@ -1,3 +1,5 @@
+#https://www.hackerrank.com/challenges/2d-array/problem
+
 #This function takes in an array (6 X 6 in the example) and finds the greatest sum of numbers within an hourglass structure within that array
 
 def hourglassArray(arr):

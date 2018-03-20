@@ -1,3 +1,5 @@
+#https://www.hackerrank.com/challenges/sparse-arrays/problem
+
 def sparseArrays(strings, queries):
     for i in range (0, len(queries)):
         count = 0
