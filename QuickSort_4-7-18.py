@@ -20,8 +20,9 @@ def QuickSort(arr, leftBound=0, rightBound=None):
         for i in range(leftBound + 1, rightBound + 1):
             if (arr[i] < pivotValue):
                 sortedIndex += 1
-                #Note: If the first number in the array/subarray is less than the pivot, then the value is swapped with itself, but this still works just fine
-                arr[sortedIndex], arr[i] = arr[i], arr[sortedIndex]
+                #Note: If the first number in the array/subarray is also less than the pivot, than it does not need to be swapped because it is already in place
+                if (sortedIndex != i):
+                    arr[sortedIndex], arr[i] = arr[i], arr[sortedIndex]
         arr[leftBound], arr[sortedIndex] = arr[sortedIndex], arr[leftBound]
         #You run it again on everything to the left of the pivot and everything to the right of the pivot
         QuickSort(arr, leftBound, sortedIndex - 1)
@@ -29,6 +30,6 @@ def QuickSort(arr, leftBound=0, rightBound=None):
 
 
 
-sampleArray = [1, 4, 7, 9, 2, 6, 3]
+sampleArray = [1, 2, 7, 9, 4, 6, 3]
 QuickSort(sampleArray)
 print(sampleArray)
