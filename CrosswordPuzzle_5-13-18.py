@@ -60,4 +60,32 @@ def crosswordPuzzle(crossword, hintDict, yPosition = 0, xPosition = 0):
                                 continue
                             else:
                                 return solution
-                                
+                #NOTE: Do I need to make some way for this to handle the possibility where there are words to both down and to the right?
+                if(crossword[y][x - 1] == "-"):
+                    #These below lines are used to simply count the amount of empty spaces we have, so we can pick a word from our hintDict that matches that length
+                    counter = xPosition + 1
+                    while(crossword[y][counter] == "-"):
+                        if (counter + 1 == xLength):
+                            counter += 1
+                            break
+                        counter += 1
+                    distance = counter - xPosition
+                    #If we have a word of the designated length in our hintDict, then we need to plug it in and run a recursive call to continue running our function
+                    if (distance in hintDict.keys()):
+                        for possibility in hintDict[distance]:
+                            newCounter = 0
+                            crosswordCopy = crossword
+                            while (newCounter < distance):
+                                crosswordCopy[yPosition][xPosition + newCounter] = possibility[newCounter]
+                                newCounter += 1
+                            hintDictCopy = copy.deepcopy(hintDict) hintDictCopy[distance].remove(possibility)
+                            #Make sure this operation is actually happening in hintDictCopy, rather than a copy of the set that is not connected to hintDictCopy (I believe it should be as this is passed by reference, but might be a good place to troubleshoot if things go south)
+
+                            solution = crosswordPuzzle(crosswordCopy, hintsCopy, yPosition, xPosition, hintDictCopy)
+
+                            #We'll have crosswordPuzzle return a crossword only if it successfully finishes all of the loops; otherwise, we'll have it return false, and this will continue
+
+                            if (solution == False):
+                                continue
+                            else:
+                                return solution
