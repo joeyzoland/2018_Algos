@@ -24,7 +24,6 @@ class Solution(object):
         :type k: int
         :rtype: List[List[int]]
         """
-        global result
         result = []
 
         def combineHelper(counter, currentList):
@@ -39,7 +38,6 @@ class Solution(object):
                 copy2 = currentList[:]
                 combineHelper(counter + 1, copy)
                 combineHelper(counter + 1, copy2)
-
         combineHelper(1, [])
         return result
 
