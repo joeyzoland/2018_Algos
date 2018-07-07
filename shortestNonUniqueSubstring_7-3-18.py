@@ -36,8 +36,8 @@ def shortestUniqueSubstring(string, substring):
                     if string[j] not in hashMap:
                         start += 1
                     #If the character in question is a special character, but its frequency in the hash map is negative, then we know we have at least one more of the character in the window than necessary, so we update our map and increment the pointer past it
-                    elif hashMap[string[i]] < 0:
-                        hashMap[string[i]] += 1
+                    elif hashMap[string[start]] < 0:
+                        hashMap[string[start]] += 1
                         start += 1
                     else: #IF the character is in hashMap and is necessary for the window to contain the substring, than we should increment no longer
                         break
@@ -47,7 +47,7 @@ def shortestUniqueSubstring(string, substring):
     return result
 
 #TESTING
-testArray = [["ADOBECODEBANC", "ABC"], ["codebancdc", "abcc"], ["mamamia", "ai"]]
+testArray = [["ADOBECODEBANC", "ABC"], ["codebancdc", "abcc"], ["mamamia", "ai"], ["bba", "ba"]]
 for test in testArray:
     print(shortestUniqueSubstring(test[0], test[1]))
 """
