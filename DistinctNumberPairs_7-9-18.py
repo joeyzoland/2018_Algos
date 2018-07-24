@@ -8,6 +8,7 @@ Target Sum : Int
 
 Output: Int
 
+How many unique pairs can be made within the array that equal the target
 [1, 2, 3, 6, 7, 8, 9, 1]
 10
 
