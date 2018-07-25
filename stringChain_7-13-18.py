@@ -40,7 +40,6 @@ def stringChain(wordSet):
 
     solution = -inf
     def stringHelper(word):
-        print("on start, word is", word)
         #Because we're working from largest to smallest, if we've already visited the word, we don't have to check it because we know we've already gotten the longest string from that word; if we haven't visited, we add it to visited here and then continue
         if word in visited:
             return
@@ -56,11 +55,11 @@ def stringChain(wordSet):
         if valid == True:
             #Have to check all of the words that can be made by subtracting one letter and, if they are in the input, recursively call on those subWords
             for index in range(0, len(word)):
+                #We don't have to iterate through the rest of the possible subwords, if we already found a solution length that matches the greatest possible chain length on an earlier iteration
                 nonlocal solution
                 if (len(currentWord) - minLength + 1) <= solution:
                     break
                 subWord = word[:index] + word[index + 1:]
-                print("subWord is", subWord)
                 if subWord in lengthMap[len(subWord)] and subWord not in visited:
                     traversed = True
                     stringHelper(subWord)
@@ -69,7 +68,6 @@ def stringChain(wordSet):
             possibleSolution = currentLength - len(word) + 1
             if possibleSolution > solution:
                 solution = possibleSolution
-            #NOTE TO SELF: PROBABLY NEED TO ADD SOME CHECK HERE TO SEE IF THERE'S NO GREATER POSSIBLE SOLUTION GIVEN CURRENTLENGTH, SWITCH OFF SOME GLOBAL FLAG, AND HAVE THAT FLAG BE REQUIRED FOR ALL RECURSIVE CALLS (PROBABLY IN THE FOR LOOP ABOVE WITH SUBWORDS)
 
     #This section of code starts from the biggest word bucket and works its way down, stopping early if there is no way to get a bigger solution than the one already recorded; this lack of a possible greater solution is indicated by doneFlag = True
     currentLength = maxLength
@@ -86,5 +84,5 @@ def stringChain(wordSet):
     return solution
 
 sampleWordList = {"a", "b", "ba", "bca", "bda", "bdca"}
-sampleWordList = {"c", "aa", "baa", "bda", "bdaa"}
+# sampleWordList = {"c", "aa", "baa", "bda", "bdaa"}
 print(stringChain(sampleWordList))
